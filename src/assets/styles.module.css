@@ -1,0 +1,11 @@
+.hello {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #555599;
+  transition: all 0.3s ease-in-out;
+}
+
+.hello:hover {
+  color: #333399;
+  background: transparent;
+}
