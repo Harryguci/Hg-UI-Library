@@ -32,7 +32,7 @@ function TreeGridPage() {
               style={{ width: "40px", height: "40px" }}
               onClick={(_) => alert("view " + row.displayName)}
             >
-              <FontAwesomeIcon icon={"fas fa-eye"} />
+              <FontAwesomeIcon icon={"eye"} />
             </button>
             <button
               type="button"
@@ -40,7 +40,7 @@ function TreeGridPage() {
               style={{ width: "40px", height: "40px" }}
               onClick={(_) => alert("view " + row.displayName)}
             >
-              <FontAwesomeIcon icon={"fas fa-trash"} />
+              <FontAwesomeIcon icon={"trash"} />
             </button>
           </div>
         );

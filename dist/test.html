@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Tree-Grid</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .group {
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .nested {
+        display: none;
+      }
+    </style>
+    <script>
+      function toggleVisibility(event) {
+        const rows =
+          event.target.parentElement.parentElement.querySelectorAll(".nested");
+        rows.forEach(
+          (row) =>
+            (row.style.display =
+              row.style.display === "none" ? "table-row" : "none")
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="group" onclick="toggleVisibility(event)">Group 1</td>
+          <td>GROUP</td>
+        </tr>
+        <tr class="nested">
+          <td>File 1.1</td>
+          <td>FILE</td>
+        </tr>
+        <tr class="nested">
+          <td>File 1.2</td>
+          <td>FILE</td>
+        </tr>
+        <tr>
+          <td class="group" onclick="toggleVisibility(event)">Group 2</td>
+          <td>GROUP</td>
+        </tr>
+        <tr class="nested">
+          <td>File 2.1</td>
+          <td>FILE</td>
+        </tr>
+        <tr class="nested">
+          <td>File 2.2</td>
+          <td>FILE</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

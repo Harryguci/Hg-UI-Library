@@ -14,7 +14,7 @@ function App() {
           className="btn btn-outline-primary d-block w-max-content py-3"
           onClick={() => setShow(0)}
         >
-          <FontAwesomeIcon icon="fa-solid fa-table" />
+          <FontAwesomeIcon icon="table" />
           <span className="ms-2">TreeGrid</span>
         </button>
         <button
@@ -22,7 +22,7 @@ function App() {
           className="btn btn-outline-primary d-block w-max-content py-3"
           onClick={() => setShow(1)}
         >
-          <FontAwesomeIcon icon="fa-solid fa-hand" />
+          <FontAwesomeIcon icon="hand" />
           <span className="ms-2">Draggable List</span>
         </button>
       </div>

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { memo, ReactNode, useEffect, useMemo, useState } from "react";
+import { memo, ReactNode, useMemo } from "react";
 import { CoreTreeGridColumn } from "./CoreTreeGrid";
 import React from "react";
 
@@ -40,8 +40,8 @@ const RowRenderer: React.FC<RowRendererProps> = ({
     isFirstCell &&
     hasSubItems && (
       <span className="me-2">
-        {showSub && <FontAwesomeIcon icon={"fa-solid fa-caret-down"} />}
-        {!showSub && <FontAwesomeIcon icon={"fa-solid fa-caret-up"} />}
+        {showSub && <FontAwesomeIcon icon={"caret-down"} />}
+        {!showSub && <FontAwesomeIcon icon={"caret-up"} />}
       </span>
     );
 

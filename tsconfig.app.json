@@ -23,7 +23,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "globals.d.ts"],
+  "include": ["src", "globals.d.ts", "src/pages/treeGridData.json"],
   "plugins": [
     {
       "name": "typescript-plugin-css-modules"

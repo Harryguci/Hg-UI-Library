@@ -1,11 +1,4 @@
-import {
-  HTMLAttributes,
-  memo,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { HTMLAttributes, memo, useContext, useState } from "react";
 import "./dropArea.css";
 import { DraggableAreaContext } from "./DraggableArea";
 export interface DropAreaProps {
