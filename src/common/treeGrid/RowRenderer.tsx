@@ -32,7 +32,9 @@ const RowRenderer: React.FC<RowRendererProps> = ({
   const getPaddingLeft = (isFirstCell: boolean) =>
     isFirstCell && row.deepItem > 0
       ? `${Number.parseInt(row.deepItem) * 2 + 2}rem`
-      : "2rem";
+      : isFirstCell
+      ? "2rem"
+      : "0";
 
   const renderExpandIcon = (isFirstCell: boolean) =>
     isFirstCell &&
