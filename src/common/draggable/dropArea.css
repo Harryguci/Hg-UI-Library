@@ -1,0 +1,16 @@
+.drop-area {
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+}
+.drop-area:hover {
+  height: 50px;
+}
+.hide-drop-area {
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  height: 0px;
+}
+
+.custom-drop-area-content .card-body {
+  background: rgb(220, 220, 230);
+}

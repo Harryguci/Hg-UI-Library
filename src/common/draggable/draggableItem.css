@@ -1,0 +1,7 @@
+.draggable-item.dragging {
+  border: 1px solid gray;
+}
+
+.drop-area + .draggable-item:hover {
+  height: 50px;
+}

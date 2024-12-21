@@ -1,16 +1,58 @@
+.hg-treegrid-wrapper {
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 0.5px solid rgb(199, 199, 199);
+}
+
 .hg-treegrid {
   table-layout: fixed;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  overflow: hidden;
+  margin: 0 !important;
+}
+
+.hg-treegrid thead,
+.hg-treegrid tbody {
+  display: block;
+}
+
+.hg-treegrid tr {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.hg-treegrid tr td {
+  width: 100%;
+}
+
+.hg-treegrid__header {
+  background-color: #eaeaeb;
+}
+
+.hg-treegrid__header th {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  background-color: #eaeaeb !important;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.hg-treegrid__header th:first-child {
+  padding-left: 1.5rem;
+}
+.hg-treegrid__content {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+.hg-treegrid__content td:first-child {
+  padding-left: 2rem;
 }
 
 .treegrid-nested td:first-child {
-  padding-left: 2.5rem;
-}
-
-.treegrid-nested {
-  animation-name: nested-show;
-  animation-duration: 0.3s;
-  animation-fill-mode: both;
-  animation-timing-function: ease-out;
+  padding-left: 3.5rem;
 }
 
 @keyframes nested-show {
@@ -32,15 +74,23 @@
   cursor: pointer;
 }
 
+.treegrid-group td {
+  position: relative;
+}
+
 .treegrid-group td:first-child::before {
   content: "";
+  position: absolute;
   display: inline-flex;
   width: 10px;
   height: 16px;
   background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg>');
   background-size: cover;
   margin-right: 10px;
-  transform: translate(0, 3px);
+
+  top: 50%;
+  left: 10px;
+  transform: translate(0, -50%);
 }
 
 .treegrid-group.collapsed td:first-child::before {
@@ -51,5 +101,4 @@
   background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>');
   background-size: cover;
   margin-right: 10px;
-  transform: translate(0, 3px);
 }

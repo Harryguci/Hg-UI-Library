@@ -1,5 +1,6 @@
 import "./coretreegrid.css";
 import { Fragment, HTMLAttributes, useMemo, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export interface CoreTreeGridColumn {
   field: string;
@@ -18,10 +19,9 @@ export interface CoreTreeGridProps {
   tableAttributes?: HTMLAttributes<HTMLTableElement>;
 }
 
-const nestedClassName = "treegrid-nested";
-// const nestedHiddenClassName = nestedClassName + " hidden";
-const groupClassName = "treegrid-group";
-const groupCollapsedClassName = groupClassName + " collapsed";
+export const nestedClassName = "treegrid-nested";
+export const groupClassName = "treegrid-group";
+export const groupCollapsedClassName = groupClassName + " collapsed";
 
 function CoreTreeGrid(props: CoreTreeGridProps) {
   const {
@@ -85,17 +85,25 @@ function CoreTreeGrid(props: CoreTreeGridProps) {
             if (isReactNode) {
               const Template = col.template as React.FunctionComponent<any>;
               return (
-                <td onClick={onClick}>
+                <td
+                  onClick={onClick}
+                  style={{ width: columnWidth[index] + "%" }}
+                >
                   <Template {...row} />
                 </td>
               );
             }
             return (
-              <td onClick={onClick}>
+              <td style={{ width: columnWidth[index] + "%" }} onClick={onClick}>
                 <span>{col.template as string}</span>
               </td>
             );
-          } else return <td onClick={onClick}>{row[col.field]}</td>;
+          } else
+            return (
+              <td style={{ width: columnWidth[index] + "%" }} onClick={onClick}>
+                {row[col.field]}
+              </td>
+            );
         })}
       </tr>
     );
@@ -106,7 +114,7 @@ function CoreTreeGrid(props: CoreTreeGridProps) {
   }
 
   return (
-    <>
+    <div className="hg-treegrid-wrapper">
       <table
         id={id || propsId || ""}
         className={"table hg-treegrid " + propsClassName}
@@ -147,8 +155,8 @@ function CoreTreeGrid(props: CoreTreeGridProps) {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
 
-export { CoreTreeGrid };
+export { CoreTreeGrid as HgCoreTreeGrid };

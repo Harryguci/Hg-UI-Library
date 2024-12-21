@@ -10,26 +10,31 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "bootstrap": "^5.3.3",
-    "guid-typescript": "^1.0.9",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "guid-typescript": "1.0.9",
+    "react": "18.3.1",
+    "react-bootstrap": "^2.10.7",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@types/css-modules": "^1.0.5",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
-    "@vitejs/plugin-react": "^4.3.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "hgui": "E:\\Javascript\\Hg\\HgUI",
-    "path": "^0.12.7",
-    "ts-css-modules-vite-plugin": "^1.0.20",
-    "typescript": "^5.2.2",
-    "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.3.1"
+    "@types/css-modules": "1.0.5",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@typescript-eslint/eslint-plugin": "7.13.1",
+    "@typescript-eslint/parser": "7.13.1",
+    "@vitejs/plugin-react": "4.3.1",
+    "eslint": "8.57.0",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-react-refresh": "0.4.7",
+    "path": "0.12.7",
+    "ts-css-modules-vite-plugin": "1.0.20",
+    "typescript": "5.2.2",
+    "typescript-plugin-css-modules": "5.1.0",
+    "vite": "5.3.1"
   }
 }

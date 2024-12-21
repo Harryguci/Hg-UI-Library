@@ -1,4 +1,5 @@
-import { CoreTreeGrid, CoreTreeGridColumn } from "./CoreTreeGrid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { HgCoreTreeGrid, CoreTreeGridColumn } from "./CoreTreeGrid";
 
 export interface HgTreeGridRows {
   id: string;
@@ -13,57 +14,62 @@ export interface HgTreeGridProps {
   dataSource: HgTreeGridRows[];
 }
 
-function HgTreeGrid(props: HgTreeGridProps) {
+function HgTreeGridTest(props: HgTreeGridProps) {
   const { dataSource } = props;
   const columns = [
     {
       field: "displayName",
-      header: "Tiêu đề",
+      header: "DisplayName",
       colWidth: 50,
     },
     {
       field: "accessDate",
-      header: "Ngày truy cập",
-      colWidth: 10,
+      header: "AccessDate",
+      colWidth: 20,
     },
     {
       field: "actions",
-      header: "Hành động",
+      header: "Actions",
+      colWidth: 30,
       template: (row: HgTreeGridRows) => {
         return (
-          <>
+          <div className="d-flex">
             <button
               type="button"
-              className="btn btn-outline-primary mx-1"
+              className="btn btn-primary p-0 fs-5 d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
               onClick={(_) => alert("view " + row.displayName)}
             >
-              view
+              <FontAwesomeIcon icon={"fas fa-eye"} />
             </button>
             <button
               type="button"
-              className="btn btn-outline-danger mx-1"
+              className="btn btn-danger ms-2 p-1 fs-5 d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
               onClick={(_) => alert("view " + row.displayName)}
             >
-              delete
+              <FontAwesomeIcon icon={"fas fa-trash"} />
             </button>
-          </>
+          </div>
         );
       },
     },
   ] as CoreTreeGridColumn[];
 
   return (
-    <CoreTreeGrid
+    <HgCoreTreeGrid
       id={"core-tree-grid"}
       keyMap="id"
       parentKeyMap="parentId"
       columns={columns}
       dataSource={dataSource}
-      tableAttributes={{
-        className: "table-hover",
-      }}
+      tableAttributes={
+        {
+          // className: "table-hover",
+        }
+      }
     />
   );
 }
 
-export { HgTreeGrid };
+export { HgTreeGridTest };

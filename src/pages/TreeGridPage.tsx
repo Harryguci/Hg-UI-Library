@@ -1,7 +1,9 @@
 import { useMemo } from "react";
-import { HgTreeGridRows, HgTreeGrid } from "../common/treeGrid/HgTreeGrid";
+import {
+  HgTreeGridRows,
+  HgTreeGridTest,
+} from "../common/treeGrid/HgTreeGridTest";
 import { Guid } from "guid-typescript";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function TreeGridPage() {
   const dataSource = useMemo(
@@ -12,7 +14,7 @@ function TreeGridPage() {
           displayName: "Item 01",
         },
         {
-          id: Guid.create().toString(),
+          id: "item00000002",
           displayName: "Item 02",
         },
         {
@@ -20,13 +22,69 @@ function TreeGridPage() {
           displayName: "Item 03",
           parentId: "item00000001",
         },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 04",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 05",
+          parentId: "item00000001",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 06",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 07",
+          parentId: "item00000002",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 08",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 09",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 10",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 11",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 12",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 13",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 14",
+        },
+        {
+          id: Guid.create().toString(),
+          displayName: "Item 15",
+        },
       ] as HgTreeGridRows[],
     []
   );
   return (
     <>
-      <div className="container my-5">
-        <HgTreeGrid dataSource={dataSource} />
+      <div
+        className="container"
+        style={{ marginTop: "2rem", minHeight: "100vh" }}
+      >
+        <h1 className="display-1">TreeGrid sample</h1>
+        <div className="my-2">
+          <HgTreeGridTest dataSource={dataSource} />
+        </div>
       </div>
     </>
   );
