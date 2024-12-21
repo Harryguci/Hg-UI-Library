@@ -1,6 +1,8 @@
 import "./coretreegrid.css";
-import { Fragment, HTMLAttributes, useMemo, useState } from "react";
+import { HTMLAttributes, useMemo, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import NestedItem from "./NestedItem";
+import RowRenderer from "./RowRenderer";
 
 export interface CoreTreeGridColumn {
   field: string;
@@ -32,7 +34,7 @@ function CoreTreeGrid(props: CoreTreeGridProps) {
     columns,
     tableAttributes = {},
   } = props;
-
+  const maxDeptFind = 50;
   const {
     id: propsId,
     className: propsClassName,
@@ -44,19 +46,40 @@ function CoreTreeGrid(props: CoreTreeGridProps) {
     return columns.map((item) => item.colWidth ?? defaultWidth);
   }, [columns]);
 
+  function getChild(
+    root: any,
+    dataSource: any[],
+    visits: Record<string, boolean>,
+    deep: number = 0
+  ) {
+    if (deep > maxDeptFind) return [];
+    let res = { ...root };
+    res.subItems = [] as any[];
+    let child = dataSource.filter((p) => p.parentId === root[keyMap]);
+    child =
+      child && child.length > 0
+        ? child.map((p) => getChild(p, dataSource, visits, deep + 1))
+        : [];
+    res.subItems = child;
+    child.forEach((p) => {
+      visits[p[keyMap]] = true;
+    });
+    visits[res[keyMap]] = true;
+    return res;
+  }
+
   const nestedData = useMemo(() => {
     const res: Record<string, any> = {};
     const visits: Record<string, boolean> = {};
+
     dataSource.forEach((item: any) => {
       const id = item[keyMap];
       if (visits[id]) return;
       visits[id] = true;
       if (id) {
-        const child = dataSource.filter((item) => item[parentKeyMap] === id);
+        let child = dataSource.filter((item) => item[parentKeyMap] === id);
+        child = child.map((p) => getChild(p, dataSource, visits));
         item.subItems = [...child];
-        for (let t of child) {
-          visits[t[keyMap]] = true;
-        }
       }
       res[id] = item;
     });
@@ -64,50 +87,6 @@ function CoreTreeGrid(props: CoreTreeGridProps) {
   }, [dataSource]);
 
   const [parentActive, setParentActive] = useState<string[]>([]);
-
-  function RowRenderer(row: any) {
-    return (
-      <tr className={row.className}>
-        {columns.map((col: CoreTreeGridColumn, index: number) => {
-          const onClick =
-            index === 0
-              ? () => {
-                  setParentActive((prev) => {
-                    if (prev.find((p) => p === row[keyMap]))
-                      return prev.filter((p) => p !== row[keyMap]);
-                    return [...prev, row[keyMap]];
-                  });
-                }
-              : () => {};
-
-          if (col.template) {
-            const isReactNode = typeof col.template !== "string";
-            if (isReactNode) {
-              const Template = col.template as React.FunctionComponent<any>;
-              return (
-                <td
-                  onClick={onClick}
-                  style={{ width: columnWidth[index] + "%" }}
-                >
-                  <Template {...row} />
-                </td>
-              );
-            }
-            return (
-              <td style={{ width: columnWidth[index] + "%" }} onClick={onClick}>
-                <span>{col.template as string}</span>
-              </td>
-            );
-          } else
-            return (
-              <td style={{ width: columnWidth[index] + "%" }} onClick={onClick}>
-                {row[col.field]}
-              </td>
-            );
-        })}
-      </tr>
-    );
-  }
 
   function IsRowActive(rowId: string) {
     return parentActive.findIndex((item) => item === rowId) >= 0;
@@ -135,23 +114,22 @@ function CoreTreeGrid(props: CoreTreeGridProps) {
         </thead>
         <tbody className="hg-treegrid__content">
           {nestedData.map((row: any) => (
-            <Fragment key={row[keyMap]}>
-              <RowRenderer
-                {...row}
-                className={
-                  row.subItems?.length > 0
-                    ? IsRowActive(row[keyMap])
-                      ? groupClassName
-                      : groupCollapsedClassName
-                    : ""
-                }
-              />
-              {IsRowActive(row[keyMap]) &&
-                row.subItems &&
-                row.subItems.map((row: any) => (
-                  <RowRenderer {...row} className={nestedClassName} />
-                ))}
-            </Fragment>
+            <NestedItem
+              key={row[keyMap]}
+              row={row}
+              RowRenderer={(row: any) => (
+                <RowRenderer
+                  row={row}
+                  columns={columns}
+                  setParentActive={setParentActive}
+                  keyMap={keyMap}
+                  columnWidth={columnWidth}
+                />
+              )}
+              keyMap={keyMap}
+              IsRowActive={IsRowActive}
+              deepItem={0}
+            />
           ))}
         </tbody>
       </table>

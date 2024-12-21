@@ -70,8 +70,8 @@ function DraggableArea(props: DraggableAreaProps) {
                     <div className="card-body">DROP HERE</div>
                   </div>
                 }
-                itemIndex={Math.max(index - 1, 0)}
-                onDrop={() => handleDrop(Math.max(index - 1, 0))}
+                itemIndex={Math.max(index, 0)}
+                onDrop={() => handleDrop(Math.max(index, 0))}
               />
               <DraggableItem
                 itemIndex={index}

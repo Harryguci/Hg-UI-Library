@@ -3,78 +3,50 @@ import {
   HgTreeGridRows,
   HgTreeGridTest,
 } from "../common/treeGrid/HgTreeGridTest";
-import { Guid } from "guid-typescript";
-
+import defaultData from "./treeGridData.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CoreTreeGridColumn } from "../main";
 function TreeGridPage() {
-  const dataSource = useMemo(
-    () =>
-      [
-        {
-          id: "item00000001",
-          displayName: "Item 01",
-        },
-        {
-          id: "item00000002",
-          displayName: "Item 02",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 03",
-          parentId: "item00000001",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 04",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 05",
-          parentId: "item00000001",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 06",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 07",
-          parentId: "item00000002",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 08",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 09",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 10",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 11",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 12",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 13",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 14",
-        },
-        {
-          id: Guid.create().toString(),
-          displayName: "Item 15",
-        },
-      ] as HgTreeGridRows[],
-    []
-  );
+  const dataSource = useMemo(() => defaultData as HgTreeGridRows[], []);
+  const columns = [
+    {
+      field: "displayName",
+      header: "DisplayName",
+      colWidth: 50,
+    },
+    {
+      field: "status",
+      header: "Status",
+      colWidth: 20,
+    },
+    {
+      field: "actions",
+      header: "Actions",
+      colWidth: 30,
+      template: (row: HgTreeGridRows) => {
+        return (
+          <div className="d-flex">
+            <button
+              type="button"
+              className="btn btn-primary p-0 fs-5 d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
+              onClick={(_) => alert("view " + row.displayName)}
+            >
+              <FontAwesomeIcon icon={"fas fa-eye"} />
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger ms-2 p-1 fs-5 d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
+              onClick={(_) => alert("view " + row.displayName)}
+            >
+              <FontAwesomeIcon icon={"fas fa-trash"} />
+            </button>
+          </div>
+        );
+      },
+    },
+  ] as CoreTreeGridColumn[];
   return (
     <>
       <div
@@ -83,7 +55,7 @@ function TreeGridPage() {
       >
         <h1 className="display-1">TreeGrid sample</h1>
         <div className="my-2">
-          <HgTreeGridTest dataSource={dataSource} />
+          <HgTreeGridTest dataSource={dataSource} columns={columns} />
         </div>
       </div>
     </>
